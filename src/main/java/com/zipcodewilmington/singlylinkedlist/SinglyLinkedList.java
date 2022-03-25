@@ -18,7 +18,7 @@ public class SinglyLinkedList {
 
     //adds element to end of list
     public void add(Object data) {
-        //initialize node at head if one doesnt exist
+        //initialize node at head if one doesn't exist
         if (head == null) {
             head = new Node(data);
         }
@@ -59,6 +59,7 @@ public class SinglyLinkedList {
                 linkedCurrent = linkedCurrent.getNext();
             }
         }
+        assert linkedCurrent != null;
         linkedTemp.setNext(linkedCurrent.getNext());
         linkedCurrent.setNext(linkedTemp);
 
@@ -84,6 +85,36 @@ public class SinglyLinkedList {
         }
         return linkedCurrent;
     }
+        public boolean remove(int index){
+        if (index < 1 || index > size()) {return false;}
+        Node linkedCurrent = head;
+        if (head != null) {
+            for (int i = 0; i < index; i++){
+                if (linkedCurrent.getNext() == null){
+                    return false;
+                }
+                linkedCurrent = linkedCurrent.getNext();
+            }
+            linkedCurrent.setNext(linkedCurrent.getNext().getNext());
+            decrementCounter();
+            return true;
+        } return false;
 
+        }
+
+        public int size(){
+        return getCounter();
+        }
+
+        public String toString(){
+        String output = "";
+        if(head != null){
+            Node linkedCurrent = head.getNext();
+        while(linkedCurrent != null){
+            output += "[" + linkedCurrent.getData().toString() + "]";
+            linkedCurrent = linkedCurrent.getNext();
+        }
+        }return output;
+        }
 }
 
